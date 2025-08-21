@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var tabController = AppTabBarController()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 0) {
+            // MARK: 主体内容
+            VStack {
+                MainScreen(selectedTab: tabController.selectedTab)
+            }
+            // MARK: tabbar
+            CustomTabbarView()
         }
-        .padding()
+        .environmentObject(tabController)
     }
 }
 
