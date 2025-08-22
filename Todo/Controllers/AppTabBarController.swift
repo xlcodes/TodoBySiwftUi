@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-struct TabBar: Identifiable {
-    var id = UUID()
-    var iconName: String
-    var tab: TabIcon
-    var index: Int
+enum TabItemType {
+    case TabType
+    case ButtonType
 }
 
-enum TabIcon: String {
+enum Tab {
     case Home
     case TaskList
     case AddTask
@@ -22,15 +20,21 @@ enum TabIcon: String {
     case Profile
 }
 
-let tabItems: [TabBar] = [
-    TabBar(iconName: "house", tab: .Home, index: 0),
-    TabBar(iconName: "checklist.unchecked", tab: .TaskList, index: 1),
-    TabBar(iconName: "plus.circle", tab: .AddTask, index: 2),
-    TabBar(iconName: "chart.pie", tab: .Graphic, index: 3),
-    TabBar(iconName: "person", tab: .Profile, index: 4),
+struct TabItem: Identifiable {
+    var id = UUID()
+    var type: TabItemType
+    var icon: String
+    var tab: Tab
+}
+
+var tabItems: [TabItem] = [
+    TabItem(type: .TabType, icon: "house", tab: .Home),
+    TabItem(type: .TabType, icon: "checklist.unchecked", tab: .TaskList),
+    TabItem(type: .ButtonType, icon: "plus", tab: .AddTask),
+    TabItem(type: .TabType, icon: "chart.pie", tab: .Graphic),
+    TabItem(type: .TabType, icon: "person", tab: .Profile),
 ]
 
 class AppTabBarController: ObservableObject {
-    @Published var selectedTab: TabIcon = .Home
-    @Published var xOffset: CGFloat = 0 * 70.0
+    @Published var selectedTab: Tab = .Home
 }

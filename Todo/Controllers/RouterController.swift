@@ -8,3 +8,7 @@
 import Foundation
 
 // MARK: 创建路由控制器
+
+class RouterController: ObservableObject {
+    
+}
